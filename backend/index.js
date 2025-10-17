@@ -25,8 +25,8 @@ const app = express();
 
 // Middlewares
 const allowedOrigins = [
-  'http://localhost:5173', // Your local frontend
-  'https://your-vercel-app-name.vercel.app' // Your deployed frontend URL
+  'http://localhost:5173',
+  process.env.FRONTEND_URL // Use an environment variable
 ];
 
 const corsOptions = {
