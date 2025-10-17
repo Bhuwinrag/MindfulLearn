@@ -1,0 +1,71 @@
+
+html {
+  background: linear-gradient(to right bottom, #4f46e5, #8b5cf6, #d946ef);
+}
+
+body {
+  background-color: transparent;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+/* Add this to the bottom of src/index.css */
+.aurora-background {
+  background-color: #0c0a09; /* A very dark, rich base */
+  position: relative;
+  overflow: hidden;
+}
+
+.aurora-background::before,
+.aurora-background::after {
+  content: '';
+  position: absolute;
+  filter: blur(80px); /* This creates the soft glow */
+  opacity: 0.2;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* First glowing orb */
+.aurora-background::before {
+  background: radial-gradient(circle, #7c3aed, transparent 60%);
+  width: 400px;
+  height: 400px;
+  top: -150px;
+  left: -150px;
+  animation: move-aurora-1 15s infinite linear;
+}
+
+/* Second glowing orb */
+.aurora-background::after {
+  background: radial-gradient(circle, #0284c7, transparent 60%);
+  width: 500px;
+  height: 500px;
+  bottom: -200px;
+  right: -200px;
+  animation: move-aurora-2 17s infinite linear;
+}
+
+/* Keyframe animations to move the orbs */
+@keyframes move-aurora-1 {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(100px, 80px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes move-aurora-2 {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(-120px, -60px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Main content should be above the aurora effect */
+.main-content {
+  position: relative;
+  z-index: 2;
+}
