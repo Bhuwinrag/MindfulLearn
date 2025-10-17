@@ -25,8 +25,8 @@ const app = express();
 
 // Middlewares
 const allowedOrigins = [
-  'http://localhost:5173',
-  'https://mindful-learn.vercel.app/login'
+  process.env.FRONTEND_URL,
+  'http://localhost:5173'
 ];
 
 const corsOptions = {
