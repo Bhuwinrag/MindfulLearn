@@ -1,46 +1,22 @@
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
+require('dotenv').config();
 
-// Create uploads directory if it doesn't exist
-const uploadDir = 'uploads/';
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir);
-}
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
-// Set up storage engine
-const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, 'uploads/');
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'mindfulearn', // A folder name in your Cloudinary account
+    allowed_formats: ['jpeg', 'png', 'jpg', 'pdf', 'doc', 'docx', 'ppt', 'pptx']
   },
-  filename: function(req, file, cb) {
-    // Unique filename: fieldname-timestamp.extension
-    cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`);
-  }
 });
 
-// Check file type
-function checkFileType(file, cb) {
-  // Allowed extensions
-  const filetypes = /pdf|doc|docx|png|jpg|jpeg/;
-  // Check ext
-  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-  // Check mime type
-  const mimetype = filetypes.test(file.mimetype);
-
-  if (mimetype && extname) {
-    return cb(null, true);
-  } else {
-    cb('Error: Only PDF, DOC, and Image files are allowed!');
-  }
-}
-
-const upload = multer({
-  storage: storage,
-  limits: { fileSize: 10000000 }, // Increased limit to 10MB
-  fileFilter: function(req, file, cb) {
-    checkFileType(file, cb);
-  }
-});
+const upload = multer({ storage: storage });
 
 module.exports = upload;

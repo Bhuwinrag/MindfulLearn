@@ -24,8 +24,25 @@ connectDB();
 const app = express();
 
 // Middlewares
-app.use(cors()); // Enable Cross-Origin Resource Sharing
-app.use(express.json()); // Body parser for JSON
+const allowedOrigins = [
+  'http://localhost:5173', // Your local frontend
+  'https://your-vercel-app-name.vercel.app' // Your deployed frontend URL
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+};
+app.use(cors(corsOptions));
+
+app.use(express.json());
 
 // Serve uploaded files statically
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));

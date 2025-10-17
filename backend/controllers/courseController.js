@@ -14,8 +14,9 @@ const createCourse = async (req, res) => {
     });
     
     if (req.file) {
-      course.imageUrl = `/uploads/${req.file.filename}`;
-    }
+  // req.file.path is now the full Cloudinary URL
+  course.imageUrl = req.file.path;
+}
 
     const createdCourse = await course.save();
     res.status(201).json(createdCourse);
