@@ -59,8 +59,8 @@ const CoursesPage = () => {
           {courses.map((course) => {
             const isEnrolled = enrolledCourseIds.has(course._id);
             // Define the image source, with a fallback to a default image
-            const imageUrl = course.imageUrl 
-              ? `http://localhost:5000${course.imageUrl}` 
+           const imageUrl = course.imageUrl 
+              ? course.imageUrl 
               : '/images/default-course-image.jpg';
 
             return (
