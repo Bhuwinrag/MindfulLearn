@@ -5,14 +5,15 @@ const { protect } = require('../middlewares/authMiddleware');
 const { checkRole } = require('../middlewares/roleMiddleware');
 const upload = require('../middlewares/uploadMiddleware');
 
+// ## THIS IS THE FIX: Added 'protect' middleware to the GET route ##
 router.route('/')
-  .get(getAllCourses)
+  .get(protect, getAllCourses) 
   .post(protect, checkRole('Teacher'), upload.single('courseImage'), createCourse);
   
 router.get('/mycourses', protect, checkRole('Teacher'), getMyCourses);
 
 router.route('/:id')
-  .get(getCourseById);
+  .get(protect, getCourseById); // Also protect this route
   
 router.get('/:id/students', protect, checkRole('Teacher'), getEnrolledStudents);
 
