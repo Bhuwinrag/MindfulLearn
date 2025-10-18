@@ -38,7 +38,7 @@ const MyCoursesPage = () => {
             {enrolledCourses.map(course => {
               // ## ADDED: Logic to determine image source ##
               const imageUrl = course.imageUrl 
-                ? `http://localhost:5000${course.imageUrl}` 
+                ? course.imageUrl 
                 : '/images/default-course-image.jpg';
 
               return (
