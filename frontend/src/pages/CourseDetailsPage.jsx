@@ -322,8 +322,7 @@ const CourseDetailsPage = () => {
           )}
           <div className="space-y-4">
             {materials.length > 0 ? materials.map(material => (
-              <a key={material._id} href={`http://localhost:5000${material.fileUrl}`} target="_blank" rel="noopener noreferrer" className="bg-slate-800/60 p-4 rounded-lg flex justify-between items-center hover:bg-slate-700/80 transition-colors">
-                <span className="text-white font-medium">{material.title}</span>
+             <a key={material._id} href={material.fileUrl} target="_blank" rel="noopener noreferrer" className="bg-slate-800/60 p-4 rounded-lg flex justify-between items-center hover:bg-slate-700/80 transition-colors">
                 <span className="text-sm text-indigo-400">Download</span>
               </a>
             )) : <p className="text-slate-400">No materials have been uploaded for this course yet.</p>}
