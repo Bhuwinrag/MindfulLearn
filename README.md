@@ -6,7 +6,8 @@ An intelligent, next-generation Learning Management System powered by Google's G
 
 ##  Hosting Link (Live Demo)
 
-* **Link:** `https://[your-frontend-url].vercel.app`
+* **Frontend (Vercel):** `https://mindful-learn.vercel.app/`
+* **Backend (Render):** `https://mindfulearn-backend.onrender.com`
 
 ---
 
@@ -45,11 +46,12 @@ MindfuLearn goes beyond a traditional LMS by integrating cutting-edge UI and AI-
 * **Backend:** Node.js, Express.js
 * **Database:** MongoDB with Mongoose
 * **AI & Vector DB:** Google Gemini 2.0 Flash, Pinecone
-* **Deployment:** Vercel 
+* **File Storage:** Cloudinary Cloud Storage
+* **Deployment:** Vercel (Frontend), Render (Backend).
 
 ---
 
-## 👥 Team
+##  Team
 
 * **Team Name:** **CODE_MAX**
 * **Members:** 1.Bhuwin rag
@@ -59,7 +61,7 @@ MindfuLearn goes beyond a traditional LMS by integrating cutting-edge UI and AI-
 
 ---
 
-## ⚙️ Getting Started & Local Setup
+##  Getting Started & Local Setup
 
 To get a local copy up and running, follow these simple steps.
 
