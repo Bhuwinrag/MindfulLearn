@@ -45,7 +45,10 @@ const getMyEnrollments = async (req, res) => {
         }
       });
       
-    res.json(enrollments);
+    // Filter out any enrollments where the associated course has been deleted (is null)
+    const validEnrollments = enrollments.filter(enrollment => enrollment.course !== null);
+
+    res.json(validEnrollments);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
