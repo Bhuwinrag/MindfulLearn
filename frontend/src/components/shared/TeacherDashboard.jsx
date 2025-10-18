@@ -29,9 +29,8 @@ const TeacherDashboard = () => {
         ) : myCourses.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {myCourses.map(course => {
-              // ## ADDED: Logic to determine image source ##
               const imageUrl = course.imageUrl 
-                ? `http://localhost:5000${course.imageUrl}` 
+                ? course.imageUrl
                 : '/images/default-course-image.jpg';
 
               return (
