@@ -1,5 +1,6 @@
 const Enrollment = require('../models/Enrollment');
 const Course = require('../models/Course');
+const validEnrollments = enrollments.filter(enrollment => enrollment.course !== null);
 
 // @desc    Enroll in a course
 // @route   POST /api/enrollments/enroll
