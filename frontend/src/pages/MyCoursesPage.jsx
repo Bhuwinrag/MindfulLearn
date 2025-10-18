@@ -12,7 +12,8 @@ const MyCoursesPage = () => {
     const fetchEnrolledCourses = async () => {
       try {
         const { data } = await api.get('/enrollments/my-enrollments');
-        setEnrolledCourses(data.map(enrollment => enrollment.course));
+        // Filter out any enrollments where the course is null
+        setEnrolledCourses(data.map(enrollment => enrollment.course).filter(Boolean));
       } catch (error) {
         console.error("Failed to fetch enrolled courses", error);
       } finally {
@@ -35,15 +36,14 @@ const MyCoursesPage = () => {
           <p className="text-white">Loading...</p>
         ) : enrolledCourses.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {enrolledCourses.map(course => {
-              // ## ADDED: Logic to determine image source ##
+            {/* THIS IS THE FIX: We add .filter(course => course) to safely handle deleted courses */}
+            {enrolledCourses.filter(course => course).map(course => {
               const imageUrl = course.imageUrl 
-                ? course.imageUrl 
+                ? course.imageUrl
                 : '/images/default-course-image.jpg';
 
               return (
                 <Link to={`/course/${course._id}`} key={course._id} className="block bg-white/10 backdrop-blur-lg rounded-2xl shadow-xl overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                  {/* ## ADDED: Image tag ## */}
                   <img src={imageUrl} alt={course.title} className="w-full h-40 object-cover" />
                   <div className="p-6">
                     <h2 className="text-2xl font-bold text-white">{course.title}</h2>
