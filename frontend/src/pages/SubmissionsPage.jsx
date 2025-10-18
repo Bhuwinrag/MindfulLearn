@@ -76,7 +76,7 @@ const SubmissionsPage = () => {
                   <div className="flex-1">
                     <p className="text-white font-semibold">{sub.student.name}</p>
                     <p className="text-slate-400 text-sm">Submitted: {new Date(sub.submittedAt).toLocaleString()}</p>
-                    <a href={`http://localhost:5000${sub.fileUrl}`} target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:underline text-sm">
+                    <a key={material._id} href={material.fileUrl} target="_blank" rel="noopener noreferrer" className="bg-slate-800/60 p-4 rounded-lg flex justify-between items-center hover:bg-slate-700/80 transition-colors">
                       View Submitted File
                     </a>
                   </div>
